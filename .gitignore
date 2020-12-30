@@ -3,3 +3,4 @@ build
 .idea
 main.spec
 dist
+__pycache__
