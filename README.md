@@ -14,7 +14,7 @@ sudo chmod +x /usr/local/bin/pastefy
 wget -O - https://pastefy.ga/qUBt1EUG/raw | bash
 ```
 #### Using non-built version
-`INFO` requests, argparse python-packages are required
+`INFO` The pip modules requests, argparse python-packages are required
 ```bash
 git clone https://github.com/interaapps/pastefy-cli
 cd pastefy-cli
@@ -22,7 +22,6 @@ sudo cp main.py /usr/local/bin/pastefy
 # You may have to set the permission
 sudo chmod 777 /usr/local/bin/pastefy
 ```
-or move the linux-build from https://github.com/interaapps/pastefy-cli/releases into the /usr/local/bin folder as pastefy (Filename)
 
 ### Windows
 Go to https://github.com/interaapps/pastefy-cli/releases and download the windows build. Unzip the folder (Rightclick, extract all), go into it, copy the path and add it into the path variables. (Search in windows-search for environment variables, click on the environment variables button and double-click on Path and add it.)
