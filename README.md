@@ -3,7 +3,17 @@
 ## Installation
 
 ### Linux
-Installing it via moving file into /usr/bin
+#### Using built version
+```bash
+sudo wget https://github.com/interaapps/pastefy-cli/releases/download/1.0/pastefy 
+sudo cp pastefy /usr/local/bin/pastefy
+sudo chmod +x /usr/local/bin/pastefy
+```
+##### or
+```bash
+wget -O - https://pastefy.ga/qUBt1EUG/raw | bash
+```
+#### Using non-built version
 `INFO` requests, argparse python-packages are required
 ```bash
 git clone https://github.com/interaapps/pastefy-cli
