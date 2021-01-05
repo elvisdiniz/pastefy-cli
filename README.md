@@ -3,9 +3,9 @@
 ## Installation
 
 ### Linux
-#### Using built version
+#### Using built version (amd)
 ```bash
-sudo wget https://github.com/interaapps/pastefy-cli/releases/download/1.0/pastefy 
+sudo wget https://github.com/interaapps/pastefy-cli/releases/download/1.0/pastefy-linux-amd 
 sudo cp pastefy /usr/local/bin/pastefy
 sudo chmod +x /usr/local/bin/pastefy
 ```
@@ -29,7 +29,9 @@ Go to https://github.com/interaapps/pastefy-cli/releases and download the window
 ### Compile it your own
 ```bash
 pip install pyinstaller
-pyinstaller --hidden-import requests main.py
+pyinstaller --hidden-import requests -n pastefy main.py
+# On linux
+pyinstaller --hidden-import requests --onefile -n pastefy main.py
 ```
 
 ## Usage

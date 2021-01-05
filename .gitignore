@@ -1,6 +1,6 @@
 venv
 build
 .idea
-main.spec
+pastefy.spec
 dist
 __pycache__
