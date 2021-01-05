@@ -6,12 +6,12 @@
 #### Using built version (amd)
 ```bash
 sudo wget https://github.com/interaapps/pastefy-cli/releases/download/1.0/pastefy-linux-amd 
-sudo cp pastefy /usr/local/bin/pastefy
+sudo cp pastefy-linux-amd /usr/local/bin/pastefy
 sudo chmod +x /usr/local/bin/pastefy
 ```
 ##### or
 ```bash
-wget -O - https://pastefy.ga/qUBt1EUG/raw | bash
+wget -O - https://pastefy.ga/1QmBBpAE/raw | bash
 ```
 #### Using non-built version
 `INFO` The pip modules requests, argparse python-packages are required
