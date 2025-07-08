@@ -79,6 +79,13 @@ class CLI:
             self.handle_login(args)
         elif args.delete:
             self.handle_delete(args)
+        elif not args.file and not args.contents:
+            if select.select([sys.stdin], [], [], 0.0)[0]:
+                self.handle_stdin_paste(args, sys.stdin.read().strip())
+            else:
+                print(
+                    "No content provided. Use --file or --contents or pipe content to stdin.", file=sys.stderr)
+                sys.exit(1)
 
     def handle_file_paste(self, args):
         try:
@@ -92,6 +99,9 @@ class CLI:
 
     def handle_contents_paste(self, args):
         self.paste_and_print(args.title, args.contents, args.folder)
+
+    def handle_stdin_paste(self, args, stdin_content):
+        self.paste_and_print(args.title, stdin_content, args.folder)
 
     def paste_and_print(self, title, content, folder):
         if not content.strip():
