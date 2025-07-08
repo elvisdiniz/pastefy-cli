@@ -84,7 +84,7 @@ class CLI:
         try:
             with open(args.file) as f:
                 content = f.read()
-            title = args.title or args.file
+            title = args.title or os.path.basename(args.file)
             self.paste_and_print(title, content, args.folder)
         except FileNotFoundError:
             print("File not found.")
