@@ -26,7 +26,7 @@ def main():
         parsed_args = arg_parser.parse_args()
         cli.run(parsed_args)
     except Exception as e:
-        print(f"An error occurred: {e}")
+        print(f"An error occurred: {e}", file=sys.stderr)
         sys.exit(1)
 
 

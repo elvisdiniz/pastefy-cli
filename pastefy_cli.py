@@ -94,7 +94,7 @@ class CLI:
             title = args.title or os.path.basename(args.file)
             self.paste_and_print(title, content, args.folder)
         except FileNotFoundError:
-            print("File not found.")
+            print("File not found.", file=sys.stderr)
             sys.exit(1)
 
     def handle_contents_paste(self, args):
@@ -105,13 +105,13 @@ class CLI:
 
     def paste_and_print(self, title, content, folder):
         if not content.strip():
-            print("Can't paste. Content is empty")
+            print("Can't paste. Content is empty", file=sys.stderr)
             sys.exit(1)
         result = self.api.paste(title, content, folder)
         if result:
             print(f"{self.config.get('baseUrl')}/{result}")
         else:
-            print("Error during pasting")
+            print("Error during pasting", file=sys.stderr)
             sys.exit(1)
 
     def handle_login(self, args):
@@ -120,7 +120,7 @@ class CLI:
         if user_data.get("logged_in"):
             print(f"Welcome {user_data.get('name')}!")
         else:
-            print("Couldn't log in")
+            print("Couldn't log in", file=sys.stderr)
             sys.exit(1)
 
     def handle_delete(self, args):
@@ -134,5 +134,5 @@ class CLI:
         if self.api.delete_paste(args.delete):
             print("Deleted")
         else:
-            print("Couldn't delete")
+            print("Couldn't delete", file=sys.stderr)
             sys.exit(1)
