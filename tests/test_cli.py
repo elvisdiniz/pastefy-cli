@@ -71,7 +71,19 @@ class TestCLI(unittest.TestCase):
 
         self.cli.handle_contents_paste(args)
 
-        self.api.paste.assert_called_once_with("Untitled", "test content", "")
+        self.api.paste.assert_called_once_with(None, "test content", "")
+
+    def test_handle_contents_paste_with_title_success(self):
+        args = MagicMock()
+        args.contents = "test content 2"
+        args.title = "Test Title"
+        args.folder = ""
+        self.api.paste.return_value = "123"
+
+        self.cli.handle_contents_paste(args)
+
+        self.api.paste.assert_called_once_with(
+            "Test Title", "test content 2", "")
 
     def test_paste_and_print_empty_content(self):
         with self.assertRaises(SystemExit):

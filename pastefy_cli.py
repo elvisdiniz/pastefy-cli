@@ -91,8 +91,7 @@ class CLI:
             sys.exit(1)
 
     def handle_contents_paste(self, args):
-        title = args.title or "Untitled"
-        self.paste_and_print(title, args.contents, args.folder)
+        self.paste_and_print(args.title, args.contents, args.folder)
 
     def paste_and_print(self, title, content, folder):
         if not content.strip():
@@ -116,7 +115,8 @@ class CLI:
 
     def handle_delete(self, args):
         if not args.yes:
-            confirmation = input("Are you sure you want to delete this paste? [y/N] ")
+            confirmation = input(
+                "Are you sure you want to delete this paste? [y/N] ")
             if confirmation.lower() != 'y':
                 print("Deletion cancelled.")
                 sys.exit(0)
