@@ -10,7 +10,7 @@ INSTALL_DIR = $(HOME)/.local/bin
 # --- Targets ---
 
 # Default target
-all: build
+all: test build
 
 # Build the single executable
 build:
@@ -38,4 +38,9 @@ clean:
 	@rm -rf $(DIST_DIR)
 	@echo "Clean complete."
 
-.PHONY: all build install clean
+# Run tests
+test:
+	@echo "Running tests..."
+	@python3 -m unittest discover tests
+
+.PHONY: all build install clean test
