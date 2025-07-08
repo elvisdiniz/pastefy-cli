@@ -1,33 +1,73 @@
 # Pastefy CLI
 
+A command-line interface for Pastefy, an open-source pastebin service.
+
 ## Installation
 
-`INFO` The pip modules requests, argparse python-packages are required
+To install the Pastefy CLI, run the following command:
+
 ```bash
-git clone https://github.com/interaapps/pastefy-cli
-cd pastefy-cli
-sudo cp main.py /usr/local/bin/pastefy
-# You may have to set the permission
-sudo chmod 777 /usr/local/bin/pastefy
+make install
+```
+
+This will build the `pastefy-cli` executable and install it in `~/.local/bin`.
 
 ## Usage
+
+The Pastefy CLI can be used to:
+
+*   **Paste from a file:**
+
+    ```bash
+    pastefy-cli --file <file_path>
+    ```
+
+*   **Paste from standard input:**
+
+    ```bash
+    echo "Hello, world!" | pastefy-cli --contents -
+    ```
+
+*   **Set a title for your paste:**
+
+    ```bash
+    pastefy-cli --file <file_path> --title "My Paste"
+    ```
+
+*   **Set your API key and base URL:**
+
+    ```bash
+    pastefy-cli --key <api_key> --base-url <base_url>
+    ```
+
+*   **Set a folder for your paste:**
+
+    ```bash
+    pastefy-cli --file <file_path> --folder "My Folder"
+    ```
+
+*   **Delete a paste:**
+
+    ```bash
+    pastefy-cli --delete <paste_id>
+    ```
+
+## Development
+
+To build the `pastefy-cli` executable, run the following command:
+
 ```bash
-# Paste a file
-pastefy -f README.md
+make build
+```
 
-# Set title
-pastefy -f README.md -t Test.md
+To run the tests, run the following command:
 
-# Paste contents
-pastefy -c "Hello world"
+```bash
+make test
+```
 
-# Paste contents with title
-pastefy -c "print('Hello')" -t "test.py"
+To clean up the build artifacts, run the following command:
 
-# Login with pastefy (https://pastefy.ga/apikeys)
-pastefy --key {api-key}
-
-pastefy --delete {paste_id}
-
-pastefy -f README.md --folder {folder_id}
+```bash
+make clean
 ```
