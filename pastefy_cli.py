@@ -3,6 +3,7 @@ import requests
 import json
 import os
 import pathlib
+import sys
 
 
 class PastefyAPI:
@@ -87,6 +88,7 @@ class CLI:
             self.paste_and_print(title, content, args.folder)
         except FileNotFoundError:
             print("File not found.")
+            sys.exit(1)
 
     def handle_contents_paste(self, args):
         title = args.title or "Untitled"
@@ -95,12 +97,13 @@ class CLI:
     def paste_and_print(self, title, content, folder):
         if not content.strip():
             print("Can't paste. Content is empty")
-            return
+            sys.exit(1)
         result = self.api.paste(title, content, folder)
         if result:
             print(f"{self.config.get('baseUrl')}/{result}")
         else:
             print("Error during pasting")
+            sys.exit(1)
 
     def handle_login(self, args):
         self.config.write_config({"key": args.key, "baseUrl": args.base_url})
@@ -109,15 +112,17 @@ class CLI:
             print(f"Welcome {user_data.get('name')}!")
         else:
             print("Couldn't log in")
+            sys.exit(1)
 
     def handle_delete(self, args):
         if not args.yes:
             confirmation = input("Are you sure you want to delete this paste? [y/N] ")
             if confirmation.lower() != 'y':
                 print("Deletion cancelled.")
-                return
+                sys.exit(0)
 
         if self.api.delete_paste(args.delete):
             print("Deleted")
         else:
             print("Couldn't delete")
+            sys.exit(1)
