@@ -16,37 +16,41 @@ This will build the `pastefy-cli` executable and install it in `~/.local/bin`.
 
 The Pastefy CLI can be used to:
 
-*   **Paste from a file:**
+* **Paste from a file:**
 
     ```bash
     pastefy-cli --file <file_path>
     ```
 
-*   **Paste from standard input:**
+* **Paste from standard input:**
 
     ```bash
-    echo "Hello, world!" | pastefy-cli --contents -
+    # From string
+    echo "Hello, world!" | pastefy-cli --title "My Paste"
+    # From file
+    cat <file_path> | pastefy-cli --title "My Paste"
+    pastefy-cli --title "My Paste" < file_path
     ```
 
-*   **Set a title for your paste:**
+* **Set a title for your paste:**
 
     ```bash
     pastefy-cli --file <file_path> --title "My Paste"
     ```
 
-*   **Set your API key and base URL:**
+* **Set your API key and base URL:**
 
     ```bash
     pastefy-cli --key <api_key> --base-url <base_url>
     ```
 
-*   **Set a folder for your paste:**
+* **Set a folder for your paste:**
 
     ```bash
     pastefy-cli --file <file_path> --folder "My Folder"
     ```
 
-*   **Delete a paste:**
+* **Delete a paste:**
 
     ```bash
     pastefy-cli --delete <paste_id>
@@ -64,6 +68,12 @@ To run the tests, run the following command:
 
 ```bash
 make test
+```
+
+To install the script in `~/.local/bin`, run:
+
+```bash
+make install
 ```
 
 To clean up the build artifacts, run the following command:
