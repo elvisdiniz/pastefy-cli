@@ -18,7 +18,8 @@ def main():
     arg_parser.add_argument("--base-url", type=str,
                             help="Set your base url address")
     arg_parser.add_argument("--folder", type=str, help="Set folder")
-    arg_parser.add_argument("--delete", type=str, help="Deletes a paste")
+    arg_parser.add_argument("-d", "--delete", type=str, help="Deletes a paste")
+    arg_parser.add_argument("-y", "--yes", action="store_true", help="No interaction, assume yes for all prompts")
 
     parsed_args = arg_parser.parse_args()
     cli.run(parsed_args)

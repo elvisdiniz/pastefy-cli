@@ -111,6 +111,12 @@ class CLI:
             print("Couldn't log in")
 
     def handle_delete(self, args):
+        if not args.yes:
+            confirmation = input("Are you sure you want to delete this paste? [y/N] ")
+            if confirmation.lower() != 'y':
+                print("Deletion cancelled.")
+                return
+
         if self.api.delete_paste(args.delete):
             print("Deleted")
         else:
