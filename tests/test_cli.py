@@ -26,7 +26,8 @@ class TestCLI(unittest.TestCase):
         args.delete = "123"
         args.yes = False
 
-        self.cli.handle_delete(args)
+        with self.assertRaises(SystemExit):
+            self.cli.handle_delete(args)
 
         self.api.delete_paste.assert_not_called()
 
