@@ -7,7 +7,9 @@ import os, os.path
 import pathlib
 
 configTemplate = {
-    "key": "--"
+    "key": "--",
+    "baseUrl": "https://pastefy.ga",
+    "apiVersion": "v2"
 }
 
 config = configTemplate
@@ -16,7 +18,7 @@ configPath = os.path.expanduser("~")+"/.config/pastefycli.json"
 
 def paste(title, content, folder=""):
     global config
-    response = requests.post("https://pastefy.ga/api/v2/paste", json={
+    response = requests.post(config["baseUrl"]+"/api/"+config["apiVersion"]+"/paste", json={
         "content": content,
         "title": title,
         "folder": folder
@@ -51,6 +53,7 @@ if __name__ == '__main__':
     argParser.add_argument("--title", "-t", type=str, help="Set Paste title")
     argParser.add_argument("--contents", "-c", type=str, help="Set Paste contents")
     argParser.add_argument("--key", type=str, help="Set your api-key")
+    argParser.add_argument("--base-url", type=str, help="Set your base url address")
     argParser.add_argument("--folder", type=str, help="Set folder")
     argParser.add_argument("--delete", type=str, help="Deletes a paste")
 
@@ -87,12 +90,12 @@ if __name__ == '__main__':
             if isinstance(result, bool) and result is False:
                 print("Error during pasting")
             else:
-                print("https://pastefy.ga/"+result)
+                print(config["baseUrl"]+result)
     
-    if parsed.key is not None:
-        writeConfig({"key": parsed.key})
+    if parsed.key is not None and parsed.baseUrl is not None:
+        writeConfig({"key": parsed.key, "baseUrl": parsed.baseUrl})
         
-        response = requests.get("https://pastefy.ga/api/v2/user", headers={
+        response = requests.get(config["baseUrl"]+"/api/"+config["apiVersion"]+"/user", headers={
             "x-auth-key": config["key"]
         })
 
@@ -104,7 +107,7 @@ if __name__ == '__main__':
 
 
     if parsed.delete is not None:
-        response = requests.delete("https://pastefy.ga/api/v2/paste/"+parsed.delete, headers={
+        response = requests.delete(config["baseUrl"]+"/api/"+config["apiVersion"]+"/paste/"+parsed.delete, headers={
             "x-auth-key": config["key"]
         })
 
