@@ -23,6 +23,6 @@ RUN apk update && \
     apk upgrade --no-cache
 
 # Install Python and pip
-RUN apk install --no-cache \
+RUN apk add --no-cache \
     python3 \
     py3-requests
