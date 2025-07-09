@@ -1,6 +1,7 @@
 import unittest
 from unittest.mock import MagicMock, patch
-from pastefy_cli import CLI
+
+from lib.cli import CLI
 
 
 class TestCLI(unittest.TestCase):

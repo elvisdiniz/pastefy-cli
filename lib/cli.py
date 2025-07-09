@@ -1,74 +1,13 @@
-import select
-import requests
-import json
 import os
-import pathlib
+import select
 import sys
 
-
-class PastefyAPI:
-    def __init__(self, config):
-        self.config = config
-
-    def paste(self, title, content, folder=""):
-        response = requests.post(
-            f"{self.config.get('baseUrl')}/api/{self.config.get('apiVersion')}/paste",
-            json={"content": content, "title": title, "folder": folder},
-            headers={"x-auth-key": self.config.get("key")},
-        )
-        parsed_response = response.json()
-        if parsed_response.get("success"):
-            return parsed_response["paste"]["id"]
-        return False
-
-    def delete_paste(self, paste_id):
-        response = requests.delete(
-            f"{self.config.get('baseUrl')}/api/{self.config.get('apiVersion')}/paste/{paste_id}",
-            headers={"x-auth-key": self.config.get("key")},
-        )
-        return response.json().get("success", False)
-
-    def get_user(self):
-        response = requests.get(
-            f"{self.config.get('baseUrl')}/api/{self.config.get('apiVersion')}/user",
-            headers={"x-auth-key": self.config.get("key")},
-        )
-        return response.json()
-
-
-class Config:
-    def __init__(self, config_path=None):
-        self.config_template = {
-            "key": "--",
-            "baseUrl": "https://pastefy.ga",
-            "apiVersion": "v2",
-        }
-        self.config_path = config_path or os.path.expanduser(
-            "~/.config/pastefycli.json"
-        )
-        self.config = self.load_config()
-
-    def load_config(self):
-        if not os.path.isfile(self.config_path):
-            self.write_config(self.config_template)
-            return self.config_template
-        with open(self.config_path, "r") as config_file:
-            return {**self.config_template, **json.load(config_file)}
-
-    def write_config(self, content):
-        pathlib.Path(os.path.dirname(self.config_path)).mkdir(
-            parents=True, exist_ok=True
-        )
-        with open(self.config_path, "w") as config_file:
-            self.config = {**self.config, **content}
-            json.dump(self.config, config_file)
-
-    def get(self, key):
-        return self.config.get(key)
+from lib.config import Config
+from lib.pastefy_api import PastefyAPI
 
 
 class CLI:
-    def __init__(self, api, config):
+    def __init__(self, api: PastefyAPI, config: Config):
         self.api = api
         self.config = config
 

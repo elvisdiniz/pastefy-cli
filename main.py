@@ -1,8 +1,11 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 import argparse
 import sys
-from pastefy_cli import PastefyAPI, Config, CLI
+
+from lib.cli import CLI
+from lib.config import Config
+from lib.pastefy_api import PastefyAPI
 
 
 def main():

@@ -1,6 +1,7 @@
 import unittest
 from unittest.mock import MagicMock, patch
-from pastefy_cli import PastefyAPI, Config, CLI
+
+from lib.pastefy_api import PastefyAPI
 
 
 class TestPastefyAPI(unittest.TestCase):
