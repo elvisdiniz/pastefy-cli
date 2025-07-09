@@ -4,3 +4,4 @@ build
 pastefy.spec
 dist
 __pycache__
+.coverage

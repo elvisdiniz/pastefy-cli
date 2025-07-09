@@ -25,4 +25,5 @@ RUN apk update && \
 # Install Python and pip
 RUN apk add --no-cache \
     python3 \
-    py3-requests
+    py3-requests \
+    py3-coverage
