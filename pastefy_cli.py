@@ -1,4 +1,3 @@
-
 import select
 import requests
 import json
@@ -15,7 +14,7 @@ class PastefyAPI:
         response = requests.post(
             f"{self.config.get('baseUrl')}/api/{self.config.get('apiVersion')}/paste",
             json={"content": content, "title": title, "folder": folder},
-            headers={"x-auth-key": self.config.get('key')}
+            headers={"x-auth-key": self.config.get("key")},
         )
         parsed_response = response.json()
         if parsed_response.get("success"):
@@ -25,14 +24,14 @@ class PastefyAPI:
     def delete_paste(self, paste_id):
         response = requests.delete(
             f"{self.config.get('baseUrl')}/api/{self.config.get('apiVersion')}/paste/{paste_id}",
-            headers={"x-auth-key": self.config.get('key')}
+            headers={"x-auth-key": self.config.get("key")},
         )
         return response.json().get("success", False)
 
     def get_user(self):
         response = requests.get(
             f"{self.config.get('baseUrl')}/api/{self.config.get('apiVersion')}/user",
-            headers={"x-auth-key": self.config.get('key')}
+            headers={"x-auth-key": self.config.get("key")},
         )
         return response.json()
 
@@ -42,10 +41,11 @@ class Config:
         self.config_template = {
             "key": "--",
             "baseUrl": "https://pastefy.ga",
-            "apiVersion": "v2"
+            "apiVersion": "v2",
         }
         self.config_path = config_path or os.path.expanduser(
-            "~/.config/pastefycli.json")
+            "~/.config/pastefycli.json"
+        )
         self.config = self.load_config()
 
     def load_config(self):
@@ -57,7 +57,8 @@ class Config:
 
     def write_config(self, content):
         pathlib.Path(os.path.dirname(self.config_path)).mkdir(
-            parents=True, exist_ok=True)
+            parents=True, exist_ok=True
+        )
         with open(self.config_path, "w") as config_file:
             self.config = {**self.config, **content}
             json.dump(self.config, config_file)
@@ -85,7 +86,9 @@ class CLI:
                 self.handle_stdin_paste(args, sys.stdin.read().strip())
             else:
                 print(
-                    "No content provided. Use --file or --contents or pipe content to stdin.", file=sys.stderr)
+                    "No content provided. Use --file or --contents or pipe content to stdin.",
+                    file=sys.stderr,
+                )
                 sys.exit(1)
 
     def handle_file_paste(self, args):
@@ -126,9 +129,8 @@ class CLI:
 
     def handle_delete(self, args):
         if not args.yes:
-            confirmation = input(
-                "Are you sure you want to delete this paste? [y/N] ")
-            if confirmation.lower() != 'y':
+            confirmation = input("Are you sure you want to delete this paste? [y/N] ")
+            if confirmation.lower() != "y":
                 print("Deletion cancelled.")
                 sys.exit(0)
 

@@ -1,7 +1,7 @@
-
 import unittest
 from unittest.mock import MagicMock, patch
 from pastefy_cli import CLI
+
 
 class TestCLI(unittest.TestCase):
     def setUp(self):
@@ -82,8 +82,7 @@ class TestCLI(unittest.TestCase):
 
         self.cli.handle_contents_paste(args)
 
-        self.api.paste.assert_called_once_with(
-            "Test Title", "test content 2", "")
+        self.api.paste.assert_called_once_with("Test Title", "test content 2", "")
 
     def test_paste_and_print_empty_content(self):
         with self.assertRaises(SystemExit):
@@ -103,7 +102,9 @@ class TestCLI(unittest.TestCase):
 
         self.cli.handle_login(args)
 
-        self.config.write_config.assert_called_once_with({"key": "test_key", "baseUrl": "https://pastefy.ga"})
+        self.config.write_config.assert_called_once_with(
+            {"key": "test_key", "baseUrl": "https://pastefy.ga"}
+        )
 
     def test_handle_login_failure(self):
         args = MagicMock()
@@ -113,6 +114,7 @@ class TestCLI(unittest.TestCase):
 
         with self.assertRaises(SystemExit):
             self.cli.handle_login(args)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -1,7 +1,7 @@
-
 import unittest
 from unittest.mock import MagicMock, patch
 from pastefy_cli import PastefyAPI, Config, CLI
+
 
 class TestPastefyAPI(unittest.TestCase):
     def setUp(self):
@@ -9,7 +9,7 @@ class TestPastefyAPI(unittest.TestCase):
         self.config.get.side_effect = lambda key: {
             "baseUrl": "https://pastefy.ga",
             "apiVersion": "v2",
-            "key": "test_key"
+            "key": "test_key",
         }.get(key)
         self.api = PastefyAPI(self.config)
 
@@ -57,6 +57,7 @@ class TestPastefyAPI(unittest.TestCase):
 
         result = self.api.get_user()
         self.assertEqual(result, {"logged_in": True, "name": "test_user"})
+
 
 if __name__ == "__main__":
     unittest.main()
