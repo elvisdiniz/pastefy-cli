@@ -12,8 +12,14 @@
 			"extensions": [
 				"KevinRose.vsc-python-indent",
 				"njpwerner.autodocstring",
-				"LittleFoxTeam.vscode-python-test-adapter"
-			]
+				"LittleFoxTeam.vscode-python-test-adapter",
+				"ms-python.black-formatter",
+				"ms-python.vscode-pylance",
+				"ms-python.python"
+			],
+			"[python]": {
+				"editor.defaultFormatter": "ms-python.black-formatter"
+			}
 		}
 	}
 
